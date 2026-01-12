@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Authentication Page</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <style>
+    :root {
+      --primary: #4a90e2;
+      --primary-light: #7ab8f5;
+      --primary-dark: #2a64b7;
+      --background-gradient-start: #e0f0ff;
+      --background-gradient-end: #a8d0ff;
+      --input-background: #f0f5fa;
+      --input-focus: #d0e4ff;
+      --button-gradient-start: #4a90e2;
+      --button-gradient-end: #357abd;
+      --text-primary: #2c3e50;
+      --text-secondary: #637381;
+      --curve-opacity: 0.3;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, var(--background-gradient-start) 0%, var(--background-gradient-end) 100%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 12px 40px rgba(74, 144, 226, 0.3);
+      overflow: hidden;
+      width: 420px;
+      max-width: 95vw;
+      position: relative;
+      padding: 32px 28px 28px 28px;
+      box-sizing: border-box;
+      text-align: center;
+    }
+
+    /* .curve_shape {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 140px;
+  height: 140px;
+  background: var(--primary);
+  border-radius: 0; /* removes curve */
+  /* z-index: 1;
+  opacity: 0.15;
+  pointer-events: none;
+} */ */
+
+    .content_wrapper {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .info_content {
+      text-align: center;
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+    }
+
+    .info_content h2 {
+      font-weight: 700;
+      font-size: 2.25rem;
+      margin: 0;
+      line-height: 1.1;
+    }
+
+    .form_box h2 {
+      margin: 0 0 18px 0;
+      font-weight: 600;
+      font-size: 1.75rem;
+      color: var(--primary);
+    }
+
+    .input_box {
+      position: relative;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+    }
+
+    .input_box input[type='text'],
+    .input_box input[type='password'],
+    .input_box input[type='email'],
+    .input_box input[type='tel'] {
+      background: var(--input-background);
+      border: 1.8px solid #d8dce6;
+      outline: none;
+      padding: 16px 16px 16px 44px;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: background 0.3s, border-color 0.3s;
+      width: 100%;
+      box-sizing: border-box;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .input_box input:focus {
+      background: var(--input-focus);
+      border-color: var(--primary);
+      box-shadow: 0 0 6px var(--primary-light);
+    }
+
+    /* Floating Labels */
+    .input_box label {
+      position: absolute;
+      left: 44px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-secondary);
+      font-size: 1em;
+      pointer-events: none;
+      user-select: none;
+      transition: 0.2s cubic-bezier(0.85, 0, 0.15, 1);
+      background: transparent;
+      z-index: 2;
+      padding: 0 6px;
+    }
+
+    /* Float the label on focus or if input has text */
+    .input_box input:focus + label,
+    .input_box input:not(:placeholder-shown) + label {
+      top: 4px;
+      left: 38px;
+      font-size: 0.82em;
+      background: #fff;
+      color: var(--primary-dark);
+      opacity: 0.95;
+    }
+
+    .input_box i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary);
+      font-size: 1.2em;
+      opacity: 0.75;
+    }
+
+    .input_box button.b1,
+    a.b1.forgot-link {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(120deg, var(--button-gradient-start), var(--button-gradient-end));
+      color: #fff;
+      font-size: 1.1em;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(53, 122, 189, 0.4);
+      margin-top: 6px;
+      margin-bottom: 10px;
+      transition: filter 0.3s;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+      user-select: none;
+    }
+
+    .input_box button.b1:hover,
+    a.b1.forgot-link:hover {
+      filter: brightness(1.12);
+    }
+
+    .regi_link {
+      text-align: center;
+      font-size: 0.95em;
+      color: var(--text-secondary);
+    }
+
+    .regi_link a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+      cursor: pointer;
+    }
+
+    .regi_link a:hover {
+      color: var(--primary-dark);
+    }
+
+    /* Hide all forms initially */
+    .form_box {
+      display: none;
+      text-align: left;
+    }
+
+    /* Show the active form */
+    .form_box.active {
+      display: block;
+    }
+
+    /* Info headings for Login, SignUp, and Forgot Password */
+    .info_content {
+      margin-bottom: 10px;
+      user-select: none;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 18px 4vw;
+        border-radius: 14px;
+        width: 95vw;
+      }
+      .curve_shape {
+        width: 120px;
+        height: 120px;
+        top: -51px;
+        left: -41px;
+      }
+      .info_content h2 {
+        font-size: 1.75rem;
+      }
+      .form_box h2 {
+        font-size: 1.4rem;
+      }
+      .input_box button.b1,
+      a.b1.forgot-link {
+        font-size: 1em;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="curve_shape"></div>
+    <div class="content_wrapper">
+
+      <!-- Heading messages for each form -->
+      <div class="info_content" id="loginInfo">
+        <h2>Welcome Back</h2>
+      </div>
+      <div class="info_content" id="signupInfo" style="display:none;">
+        <h2>Create Account</h2>
+      </div>
+      <div class="info_content" id="forgotInfo" style="display:none;">
+        <h2>Forgot Password</h2>
+      </div>
+
+      <!-- Login Form -->
+      <div class="form_box active" id="loginForm">
+        <h2>Login</h2>
+        <form action="#">
+          <div class="input_box">
+            <input id="login_username" type="text" required placeholder=" " autocomplete="username" />
+            <label for="login_username">Username</label>
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div class="input_box">
+            <input id="login_password" type="password" required placeholder=" " autocomplete="current-password" />
+            <label for="login_password">Password</label>
+            <i class="fa-solid fa-lock"></i>
+          </div>
+          <div class="input_box">
+            <button class="b1" type="submit">Login</button>
+          </div>
+          <div class="input_box">
+            <!-- Forgot Password as a link styled like button -->
+            <a href="javascript:void(0)" class="b1 forgot-link" id="showForgot">Forgot Password?</a>
+          </div>
+          <div class="regi_link">
+            <p>
+              Don't have an account? <a href="javascript:void(0)" id="showSignup">Sign up</a>
+            </p>
+          </div>
+        </form>
+      </div>
+
+      <!-- Sign Up Form -->
+      <div class="form_box" id="signupForm">
+        <h2>Sign Up</h2>
+        <form action="#">
+          <div class="input_box">
+            <input id="signup_username" type="text" required placeholder=" " autocomplete="username" />
+            <label for="signup_username">Username</label>
+            <i class="fa-solid fa-user"></i>
+          </div>
+          <div class="input_box">
+            <input id="signup_email" type="email" required placeholder=" " autocomplete="email" />
+            <label for="signup_email">Email Address</label>
+            <i class="fa-solid fa-envelope"></i>
+          </div>
+          <div class="input_box">
+            <input id="signup_mobile" type="tel" pattern="[0-9]{10}" required placeholder=" " autocomplete="tel" />
+            <label for="signup_mobile">Mobile Number</label>
+            <i class="fa-solid fa-phone"></i>
+          </div>
+          <div class="input_box">
+            <input id="signup_password" type="password" required placeholder=" " autocomplete="new-password" />
+            <label for="signup_password">New Password</label>
+            <i class="fa-solid fa-lock"></i>
+          </div>
+          <div class="input_box">
+            <input id="signup_confirm_password" type="password" required placeholder=" " autocomplete="new-password" />
+            <label for="signup_confirm_password">Confirm Password</label>
+            <i class="fa-solid fa-lock"></i>
+          </div>
+          <div class="input_box">
+            <button class="b1" type="submit">Sign Up</button>
+          </div>
+          <div class="regi_link">
+            <p>
+              Already have an account? <a href="javascript:void(0)" id="showLoginFromSignup">Login</a>
+            </p>
+          </div>
+        </form>
+      </div>
+
+      <!-- Forgot Password Form -->
+      <div class="form_box" id="forgotForm">
+        <form action="#">
+          <div class="input_box">
+            <input id="forgot_email" type="email" required placeholder=" " autocomplete="email" />
+            <label for="forgot_email">Email Address</label>
+            <i class="fa-solid fa-envelope"></i>
+          </div>
+          <div class="input_box">
+            <button class="b1" type="submit">Reset Password</button>
+          </div>
+          <div class="regi_link">
+            <p>
+              Remembered your password? <a href="javascript:void(0)" id="showLoginFromForgot">Login</a>
+            </p>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const forgotForm = document.getElementById('forgotForm');
+
+    const loginInfo = document.getElementById('loginInfo');
+    const signupInfo = document.getElementById('signupInfo');
+    const forgotInfo = document.getElementById('forgotInfo');
+
+    // Links/buttons
+    const showSignup = document.getElementById('showSignup');
+    const showLoginFromSignup = document.getElementById('showLoginFromSignup');
+    const showForgot = document.getElementById('showForgot');
+    const showLoginFromForgot = document.getElementById('showLoginFromForgot');
+
+    // Functions to toggle visibility and headings
+    function showLogin() {
+      loginForm.classList.add('active');
+      signupForm.classList.remove('active');
+      forgotForm.classList.remove('active');
+
+      loginInfo.style.display = 'block';
+      signupInfo.style.display = 'none';
+      forgotInfo.style.display = 'none';
+    }
+    function showSignupForm() {
+      signupForm.classList.add('active');
+      loginForm.classList.remove('active');
+      forgotForm.classList.remove('active');
+
+      signupInfo.style.display = 'block';
+      loginInfo.style.display = 'none';
+      forgotInfo.style.display = 'none';
+    }
+    function showForgotForm() {
+      forgotForm.classList.add('active');
+      loginForm.classList.remove('active');
+      signupForm.classList.remove('active');
+
+      forgotInfo.style.display = 'block';
+      loginInfo.style.display = 'none';
+      signupInfo.style.display = 'none';
+    }
+
+    // Event listeners for toggling
+    showSignup.addEventListener('click', () => {
+      showSignupForm();
+    });
+    showLoginFromSignup.addEventListener('click', () => {
+      showLogin();
+    });
+    showForgot.addEventListener('click', () => {
+      showForgotForm();
+    });
+    showLoginFromForgot.addEventListener('click', () => {
+      showLogin();
+    });
+
+    // Handle login form submission
+    loginForm.querySelector('form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = document.getElementById('login_username').value;
+      const password = document.getElementById('login_password').value;
+      
+      if (username && password) {
+        localStorage.setItem('userLoggedIn', 'true');
+        localStorage.setItem('userEmail', username);
+        alert('Login successful!');
+        window.location.href = 'Index.html';
+      }
+    });
+
+    // Handle signup form submission
+    signupForm.querySelector('form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const password = document.getElementById('signup_password').value;
+      const confirmPassword = document.getElementById('signup_confirm_password').value;
+      
+      if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return;
+      }
+      
+      localStorage.setItem('userLoggedIn', 'true');
+      localStorage.setItem('userEmail', document.getElementById('signup_email').value);
+      alert('Account created successfully!');
+      window.location.href = 'Index.html';
+    });
+  </script>
+</body>
+</html>
+

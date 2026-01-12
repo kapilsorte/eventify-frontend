@@ -1,0 +1,650 @@
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; 
+}
+
+/* =========================================
+   1. ROOT VARIABLES & GLOBAL RESET
+   ========================================= */
+:root {
+    --primary-color: #2b6cb0;    
+    --hover-bg:      #edf2f7;    
+    --text-dark:     #4a5568;    
+    --text-white:    #ffffff;    
+    --bg-body:       #f8f9fa;    
+    --nav-height:    80px;       
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-body);
+}
+
+/* =========================================
+   2. NAVIGATION BAR
+   ========================================= */
+.navbar {
+    background-color: var(--text-white);
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    width: 150px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 25px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    background-color: var(--hover-bg);
+    color: var(--primary-color);
+}
+
+/* to make find create static */
+.nav-links a:hover ,a.active{
+    color: #2b6cb0;
+    background-color: #edf2f7;
+}
+
+
+
+
+.nav-extra {
+    width: 150px; 
+}
+
+/* MOBILE MENU TOGGLE (Hidden on Desktop) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-dark);
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* =========================================
+   CREATE SECTION & MODAL
+   ========================================= */
+.create-section {
+    padding: 60px 0;
+    text-align: center;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.add-event-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.add-event-card {
+    width: 300px;
+    height: 250px;
+    border: 3px dashed #2b6cb0;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: rgba(43, 108, 176, 0.05);
+}
+
+.add-event-card:hover {
+    background-color: rgba(43, 108, 176, 0.1);
+    transform: translateY(-5px);
+}
+
+.icon-plus { 
+    font-size: 3rem; 
+    color: #2b6cb0; 
+    margin-bottom: 15px; 
+}
+
+.add-event-card h3 { color: #2b6cb0; }
+.add-event-card p { font-size: 0.9rem; color: #666; }
+
+/* --- MODAL FORM STYLING --- */
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 2000; 
+    left: 0; top: 0;
+    width: 100%; height: 100%; 
+    background-color: rgba(0,0,0,0.6); 
+    justify-content: center; align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%; max-width: 500px;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn { 
+    from { opacity: 0; transform: translateY(-20px); } 
+    to { opacity: 1; transform: translateY(0); } 
+}
+
+.close-btn {
+    position: absolute; top: 15px; right: 20px;
+    font-size: 28px; cursor: pointer; color: #aaa;
+}
+.close-btn:hover { color: #333; }
+
+.form-header { text-align: center; margin-bottom: 25px; color: #333; }
+.form-group { margin-bottom: 20px; text-align: left; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 0.95rem; }
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%; padding: 12px;
+    border: 1px solid #ccc; border-radius: 6px;
+    font-size: 1rem;
+}
+
+.submit-btn {
+    width: 100%; padding: 12px;
+    background-color: #2b6cb0; color: #fff;
+    border: none; border-radius: 6px;
+    font-size: 1.1rem; font-weight: bold; cursor: pointer;
+    margin-top: 10px; transition: background 0.3s;
+}
+.submit-btn:hover { background-color: #1a4971; }
+
+/* =========================================
+   CREATED EVENTS DISPLAY
+   ========================================= */
+.events-display { padding: 50px 0; min-height: 400px; }
+/* --- Updated Created Events Typography & Icons --- */
+
+/* Targets the "Your Created Events" Heading */
+.events-display h2 {
+    font-size: 3rem !important; /* Increased text size significantly */
+    /* font-weight: 800; */
+    color: #2d3748;
+    text-align: center;
+    margin-bottom: 25px !important;
+    letter-spacing: -1px;
+}
+
+/* Targets the Folder Icon in the "No Results" area */
+.no-results i {
+    font-size: 6rem; /* Increased icon size (was 3rem) */
+    margin-bottom: 20px;
+    color: #cbd5e0;
+    display: block;
+}
+
+/* Targets the "No events created yet" text */
+.no-results p {
+    font-size: 1.5rem;
+    color: #718096;
+}
+
+/* ddsvb */
+/* 1. Add white space between the sections */
+
+
+/* --- Update this specific block in create-event.css --- */
+
+.events-display .separator-line {
+    width: 80%;            /* Reduced length specifically for this section */
+    height: 2px;           /* Matches the thickness of the other section */
+    background-color: #000;/* Matches the color of the other section */
+    margin: 0 auto 50px auto; /* Keeps it centered with bottom spacing */
+}
+
+/* Ensure the Control Flow section stays full width (Location: around line 240) */
+.control-flow-section .separator-line {
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+}
+
+
+
+
+
+/* hii
+.control-flow-section {
+    padding: 60px 20px;
+    background-color: #f9f9f9; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Increased margin-top to create more white space between sections */
+    /* margin-top: 100px; 
+} */
+
+/* 2. Match the size and breadth of the lines for both sections */
+/* .separator-line {
+    border: 0;
+    height: 2px;
+    background-color: #000; /* Matching the solid black look of the flow section */
+    /* width: 10%;            /* Making it full width to match the flow section */
+    /* margin: 0 auto 50px auto; 
+    display: block; */
+/* } */ */ */ */
+
+/* 3. Ensure the 'Your Created Events' display doesn't have its own override */
+.events-display .separator-line {
+    width: 100%; 
+    height: 2px;
+    background: #000;
+}
+
+/* ?dkjajfdka */
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.no-results { text-align: center; padding: 50px; color: #777; grid-column: 1 / -1; }
+.no-results i { font-size: 3rem; margin-bottom: 15px; color: #ccc; }
+.hidden { display: none; }
+
+/* Card Styles */
+.event-card {
+    background: #fff; border-radius: 12px; overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    display: flex; flex-direction: column;
+}
+.card-image {
+    height: 180px; background-color: #eee; position: relative;
+    display: flex; align-items: center; justify-content: center;
+}
+.card-image img { width: 100%; height: 100%; object-fit: cover; }
+.badge {
+    position: absolute; top: 15px; right: 15px;
+    background-color: #ff9f43; color: #fff;
+    padding: 5px 12px; border-radius: 20px;
+    font-size: 0.8rem; font-weight: 600;
+}
+.card-content { padding: 20px; flex-grow: 1; }
+.card-content h3 { font-size: 1.25rem; margin-bottom: 5px; }
+.card-org { font-size: 0.85rem; color: #666; font-weight: 600; margin-bottom: 10px; }
+.date { font-size: 0.85rem; color: #888; margin-bottom: 15px; }
+.card-location { display: flex; gap: 10px; font-size: 0.9rem; color: #666; }
+.card-location i { color: #e74c3c; margin-top: 3px; }
+
+/* =========================================
+   7. SHARED FLOW SECTIONS
+   ========================================= */
+.control-flow-section {
+    padding: 60px 20px;
+    background-color: #f9f9f9; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 60px; 
+}
+
+.flow-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.separator-line {
+    border: 0;
+    height: 2px;
+    background-color: #000;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.flow-cards-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.flow-card {
+    background: #ffffff;
+    width: 320px;
+    padding: 40px 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.flow-card:hover {
+    transform: translateY(-10px);
+}
+
+.icon-box-flow {
+    width: 80px;
+    height: 80px;
+    background-color: #000000;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 25px;
+    flex-shrink: 0;
+}
+
+.text-content h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    width: 100%;
+}
+
+.text-content p {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+    width: 100%;
+}
+
+/* =========================================
+   FAQ SECTION STYLES
+   ========================================= */
+.faq-section {
+    padding: 80px 20px;
+    background-color: #fff;
+    margin-top: 20px;
+}
+
+.faq-container-wide {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.faq-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+}
+
+.faq-item {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eef2f6;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.faq-item:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 20px 25px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2d3748;
+    transition: color 0.3s ease;
+}
+
+.faq-question i {
+    font-size: 0.9rem;
+    color: #2b6cb0; 
+    transition: transform 0.3s ease;
+}
+
+.faq-question:hover {
+    color: #2b6cb0;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background-color: #fff;
+}
+
+.faq-answer p {
+    padding: 0 25px 25px 25px;
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #718096;
+    text-align: left;
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+
+.faq-item.active .faq-question {
+    color: #2b6cb0;
+}
+
+
+/* =========================================
+   FOOTER
+   ========================================= */
+.footer-section {
+    background: #212529;
+    padding: 70px 0;
+    width: 100%;
+    color: #ffffff;
+    margin-top: 0;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 20px;
+    flex-wrap: wrap;
+}
+
+.footer-left {
+    flex: 1;
+    min-width: 300px;
+    margin-bottom: 30px;
+}
+
+.single-cta {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.cta-icon { margin-right: 20px; }
+
+.cta-icon i {
+    color: #fff;
+    font-size: 20px;
+    background-color: #33383c;
+    height: 50px; width: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.cta-text span {
+    font-size: 15px;
+    display: block; margin-bottom: 5px; color: #fff;
+}
+
+.cta-text strong {
+    font-size: 18px; font-weight: 700; color: #fff; display: block;
+}
+
+.cta-text a {
+    color: #4a8adb;
+    font-size: 16px; text-decoration: none; font-weight: 600;
+    transition: color 0.3s;
+}
+.cta-text a:hover { color: #fff; text-decoration: underline; }
+
+.footer-right {
+    flex: 1;
+    min-width: 300px;
+    padding-left: 50px;
+}
+
+.footer-widget .footer-heading h3 {
+    color: #fff;
+    font-size: 20px; font-weight: 700; margin-bottom: 25px;
+}
+
+.footer-text p {
+    color: #8f9296;
+    font-size: 15px; line-height: 1.6; margin-bottom: 30px;
+}
+
+.footer-social-icon { display: flex; gap: 15px; }
+
+.footer-social-icon a {
+    color: #fff;
+    font-size: 18px;
+    background-color: #33383c;
+    height: 45px; width: 45px;
+    line-height: 45px;
+    text-align: center;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-social-icon a:hover {
+    background-color: #4a8adb;
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+
+
+/* =========================================
+   RESPONSIVE STYLES
+   ========================================= */
+
+@media screen and (max-width: 768px) {
+    /* 1. Navbar layout fixes */
+    .navbar {
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+
+    .nav-extra {
+        display: none; 
+    }
+
+    .menu-toggle {
+        display: flex;
+        order: 2; 
+    }
+
+    /* 2. Full-screen menu styling */
+    .nav-links {
+        position: fixed;
+        right: -100%; 
+        top: var(--nav-height); 
+        width: 100vw; 
+        height: calc(100vh - var(--nav-height));
+        background-color: #ffffff;
+        
+        /* Layout logic */
+        flex-direction: column;
+        display: flex !important;
+        align-items: center;
+        justify-content: flex-start; /* Starts from top instead of center */
+        padding-top: 60px;          /* Adds space at the very top */
+        gap: 40px;                  /* INCREASES SPACE BETWEEN LINKS */
+        
+        transition: right 0.4s ease-in-out;
+        z-index: 2000;
+    }
+
+    /* 3. Link styling for mobile */
+    .nav-links li {
+        width: 100%;             /* Ensures list items take full width */
+        text-align: center;      /* Centers text within the width */
+    }
+
+    .nav-links a {
+        font-size: 1.5rem;       /* Larger text for mobile */
+        display: block;          /* Makes the whole area clickable */
+        width: 100%;
+    }
+
+    /* 4. Active State (Slide in) */
+    .nav-links.nav-active {
+        right: 0;
+    }
+    
+    /* 5. Touch Feedback */
+    .nav-links a:active {
+        background-color: var(--hover-bg);
+        color: var(--primary-color);
+    }
+}

@@ -1,0 +1,926 @@
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; 
+}
+
+/* =========================================
+   1. ROOT VARIABLES & GLOBAL RESET
+   ========================================= */
+:root {
+    --primary-color: #2b6cb0;    
+    --hover-bg:      #edf2f7;    
+    --text-dark:     #4a5568;    
+    --text-white:    #ffffff;    
+    --bg-body:       #f8f9fa;    
+    --nav-height:    80px;       
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-body);
+}
+
+/* =========================================
+   2. NAVIGATION BAR
+   ========================================= */
+.navbar {
+    background-color: var(--text-white);
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    width: 150px;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 25px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    background-color: var(--hover-bg);
+    color: var(--primary-color);
+}
+
+.nav-extra {
+    width: 150px; 
+}
+
+/* MOBILE MENU TOGGLE (Hidden on Desktop) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.menu-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-dark);
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+/* =========================================
+   3. HERO SECTION & SLIDER
+   ========================================= */
+.hero-section {
+    position: relative;
+    height: 600px;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-white);
+}
+
+.slider-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1; 
+}
+
+/* =========================================
+   4. SLIDER CONTROLS
+   ========================================= */
+.slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-white);
+    border: none;
+    font-size: 24px;
+    padding: 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+    z-index: 20;
+}
+
+.slider-btn:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.prev { left: 20px; }
+.next { right: 20px; }
+
+/* =========================================
+   5. HERO CONTENT
+   ========================================= */
+.hero-content {
+    text-align: center;
+    z-index: 10;
+    padding: 20px;
+    max-width: 800px;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* .cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: var(--primary-color);
+    color: var(--text-white);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+} */
+
+/* .cta-button:hover {
+    background-color: #1a497a;
+} */
+
+/* =========================================
+   6. MAIN SECTION - FEATURES
+   ========================================= */
+
+/* Specific Badge Colors */
+/* Section Container */
+/* Section Layout */
+/* --- Events Preview Section Container --- */
+.events-preview-section {
+  padding: 60px 20px;
+  background-color: #f9f9f9; /* Light gray background for the section */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- Section Header --- */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.section-header h2 {
+  font-size: 2rem;
+  color: #333;
+  font-weight: 700;
+}
+
+/* --- Grid Layout --- */
+.events-grid {
+  display: grid;
+  /* Creates a responsive grid: minimum card width 260px, otherwise fills space */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+}
+
+/* --- Card Styles --- */
+.event-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column; /* Ensures footer content pushes down */
+}
+
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Card Image & Badge --- */
+.card-image {
+  position: relative;
+  height: 180px;
+  width: 100%;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #ff9f43; /* Orange accent for badge */
+  color: #fff;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* --- Card Content Area --- */
+.card-content {
+  padding: 20px;
+  flex-grow: 1; /* Makes cards same height even if content varies */
+  display: flex;
+  flex-direction: column;
+}
+
+.card-content h3 {
+  font-size: 1.25rem;
+  color: #222;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+/* --- Organization Name --- */
+.card-org {
+  font-size: 0.85rem;
+  color: #555;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+/* --- Date Styling --- */
+.date {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+/* --- Location Block --- */
+.card-location {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.4;
+  margin-top: auto; /* Pushes location to bottom of content area */
+}
+
+/* --- Updated Stealth Link for Location --- */
+.c101 {
+    text-decoration: none;
+    color: inherit;       /* Takes the grey color of the surrounding text */
+    cursor: text;         /* Optional: Keeps cursor normal until hover */
+}
+
+.c101:visited {
+    color: inherit;       /* Prevents it from turning purple */
+}
+
+.c101:hover {
+    text-decoration: underline;
+    color: var(--primary-color); /* Turns blue only on hover */
+    cursor: pointer;
+} 
+
+
+.card-location i {
+  color: #e74c3c; /* Red Pin Icon */
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+/* --- Register Button --- */
+.register-btn {
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+  background-color: rgba(43, 211, 43, 0.9); /* Parrot Green */
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  /* text-transform: uppercase; */
+  letter-spacing: 0.5px;
+}
+
+.register-btn:hover {
+  background-color: #2eb82e; /* Slightly darker green on hover */
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .section-header h2 {
+    font-size: 1.75rem;
+  }
+}
+
+
+/* browser */
+
+main {
+    padding-bottom: 60px;
+}
+
+.features-header {
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 60px; 
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.features-header h2 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 30px; 
+}
+
+.features-header hr {
+    border: 0;
+    height: 2px;
+    background-color: #000;
+    width: 100%;
+    margin-bottom: 50px; 
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 30px; 
+    padding: 0 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    padding: 30px 20px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #eaeaea;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+}
+
+.icon-box-feature {
+    font-size: 45px;
+    color: #4A90E2; 
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    margin: 15px 0;
+    font-size: 1.3rem;
+    color: #2c3e50;
+}
+
+.card p {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* =========================================
+   7. SHARED FLOW SECTIONS
+   ========================================= */
+.control-flow-section {
+    padding: 60px 20px;
+    background-color: #f9f9f9; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 60px; 
+}
+
+.flow-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.separator-line {
+    border: 0;
+    height: 2px;
+    background-color: #000;
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.flow-cards-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    align-items: stretch;
+}
+
+.flow-card {
+    background: #ffffff;
+    width: 320px;
+    padding: 40px 25px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.flow-card:hover {
+    transform: translateY(-10px);
+}
+
+.icon-box-flow {
+    width: 80px;
+    height: 80px;
+    background-color: #000000;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 25px;
+    flex-shrink: 0;
+}
+
+.text-content h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    width: 100%;
+}
+
+.text-content p {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+    width: 100%;
+}
+
+/* =========================================
+   FAQ SECTION STYLES
+   ========================================= */
+.faq-section {
+    padding: 80px 20px;
+    background-color: #fff;
+    margin-top: 20px;
+}
+
+.faq-container-wide {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.faq-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+}
+
+.faq-item {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eef2f6;
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.faq-item:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 20px 25px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2d3748;
+    transition: color 0.3s ease;
+}
+
+.faq-question i {
+    font-size: 0.9rem;
+    color: #2b6cb0; 
+    transition: transform 0.3s ease;
+}
+
+.faq-question:hover {
+    color: #2b6cb0;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    background-color: #fff;
+}
+
+.faq-answer p {
+    padding: 0 25px 25px 25px;
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #718096;
+    text-align: left;
+}
+
+.faq-item.active .faq-question i {
+    transform: rotate(180deg);
+}
+
+.faq-item.active .faq-question {
+    color: #2b6cb0;
+}
+
+/* =========================================
+   8. FOOTER
+   ========================================= */
+.footer-section {
+    background: #212529;
+    padding: 70px 0;
+    width: 100%;
+    color: #ffffff;
+    margin-top: 0;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 20px;
+    flex-wrap: wrap;
+}
+
+.footer-left {
+    flex: 1;
+    min-width: 300px;
+    margin-bottom: 30px;
+}
+
+.single-cta {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 30px;
+}
+
+.cta-icon {
+    margin-right: 20px;
+}
+
+.cta-icon i {
+    color: #fff;
+    font-size: 20px;
+    background-color: #33383c;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 50%;
+}
+
+.cta-text {
+    padding-top: 2px;
+}
+
+.cta-text span {
+    font-size: 15px;
+    display: block;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.cta-text strong {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    display: block;
+}
+
+.cta-text a {
+    color: #4a8adb;
+    font-size: 16px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.cta-text a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.footer-right {
+    flex: 1;
+    min-width: 300px;
+    padding-left: 50px;
+}
+
+.footer-widget .footer-heading h3 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.footer-text p {
+    color: #8f9296;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.footer-social-icon {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-social-icon a {
+    color: #fff;
+    font-size: 18px;
+    background-color: #33383c;
+    height: 45px;
+    width: 45px;
+    line-height: 45px;
+    text-align: center;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-social-icon a:hover {
+    background-color: #4a8adb;
+    color: #fff;
+    transform: translateY(-3px);
+}
+
+/* =========================================
+   9. RESPONSIVE MEDIA QUERIES
+   ========================================= */
+
+/* TABLETS (Max-width 1024px) */
+@media (max-width: 1024px) {
+    .cards-container {
+        gap: 20px;
+        padding: 0 20px;
+    }
+    
+    .navbar {
+        padding: 0 30px;
+    }
+}
+
+/* =========================================
+   RESPONSIVE STYLES (Matches Create Event)
+   ========================================= */
+
+@media screen and (max-width: 768px) {
+    /* 1. Navbar layout fixes */
+    .navbar {
+        justify-content: space-between;
+        padding: 0 20px;
+    }
+
+    .nav-extra {
+        display: none; 
+    }
+
+    /* Target the existing .menu-toggle class in index.html */
+    .menu-toggle {
+        display: flex; 
+        order: 2;
+    }
+
+    /* 2. Full-screen menu styling */
+    .nav-links {
+        position: fixed;
+        right: -100%; 
+        top: var(--nav-height); 
+        width: 100vw; 
+        height: calc(100vh - var(--nav-height));
+        background-color: #ffffff;
+        
+        /* Layout logic to prevent clumping */
+        flex-direction: column;
+        display: flex !important;
+        align-items: center;
+        justify-content: flex-start; /* Starts from top */
+        padding-top: 60px;          /* Space at the top */
+        gap: 40px;                  /* Space between links */
+        
+        transition: right 0.4s ease-in-out;
+        z-index: 2000;
+        box-shadow: none; /* Remove old shadow if present */
+    }
+
+    /* 3. Link styling for mobile */
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+        margin: 0; /* Reset old margins */
+    }
+
+    .nav-links a {
+        font-size: 1.5rem;
+        display: block;
+        width: 100%;
+    }
+
+    /* 4. Active State (Slide in) */
+    .nav-links.nav-active {
+        right: 0;
+        left: auto; /* Reset left property from old CSS */
+    }
+    
+    .nav-links a:active {
+        background-color: var(--hover-bg);
+        color: var(--primary-color);
+    }
+
+    .nav-extra {
+        display: none;
+    }
+
+
+    /* Hero Section */
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    /* Feature Cards */
+    .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    /* Flow Section */
+    .flow-cards-wrapper {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .flow-card {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    /* Footer */
+    .footer-content {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+
+    .footer-right {
+        padding-left: 0;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+}
+
+/* SMALL MOBILE (Max-width 480px) */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 0 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .cards-container {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-section {
+        padding: 40px 0;
+    }
+    
+    .cta-text strong {
+        font-size: 16px;
+    }
+}
+
+/* faq redirect */
+#faq-section {
+    scroll-margin-top: 100px; /* Adjusts for your sticky navbar height */
+}
+
+
+
+

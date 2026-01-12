@@ -1,0 +1,49 @@
+/* Registration Button States */
+.register-btn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: scale(1);
+}
+
+.register-btn:hover {
+    background: #218838;
+    transform: scale(1.05);
+}
+
+.register-btn:active {
+    transform: scale(0.95);
+    transition: transform 0.1s;
+}
+
+.register-btn.registered {
+    background: #dc3545;
+    color: white;
+    cursor: pointer;
+}
+
+.register-btn.registered:hover {
+    background: #c82333;
+    transform: scale(1.05);
+}
+
+.register-btn.registered:active {
+    transform: scale(0.95);
+    transition: transform 0.1s;
+}
+
+/* Registered Event Card Styling */
+.event-card.registered-event {
+    border: 2px solid #dc3545;
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.2);
+    transition: all 0.3s ease;
+}
+
+.event-card.registered-event .badge {
+    background: #dc3545;
+    color: white;
+}
