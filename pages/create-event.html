@@ -59,7 +59,8 @@
                 <h2 style="text-align: center; margin-bottom: 10px;">Your Created Events</h2>
                 <hr class="separator-line">
                 <div id="createdEventsGrid" class="events-grid">
-                    </div>
+                    <!-- Events will be loaded here -->
+                </div>
                 </section>
              <section>   <div id="noResults" class="no-results">
                     <i class="fas fa-folder-open"></i>
@@ -190,6 +191,44 @@
         </div>
     </footer>
   
-    <script src="../assets/js/create-event.js"></script> 
+    <script src="../assets/js/create-event.js"></script>
+    <script>
+        // Load events when page loads
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('https://eventify-backend-tsng.onrender.com/api/events');
+                const events = await response.json();
+                
+                const eventsGrid = document.getElementById('createdEventsGrid');
+                const noResults = document.getElementById('noResults');
+                
+                if (events.length > 0) {
+                    noResults.style.display = 'none';
+                    eventsGrid.innerHTML = events.map(event => `
+                        <div class="event-card">
+                            <div class="card-image">
+                                <img src="https://eventify-backend-tsng.onrender.com/${event.imagePath}" alt="${event.eventName}" onerror="this.src='https://via.placeholder.com/400x200?text=Event+Image'">
+                                <span class="badge">${event.category}</span>
+                            </div>
+                            <div class="card-content">
+                                <h3>${event.eventName}</h3>
+                                <div class="card-org">Organized by: ${event.organizationName}</div>
+                                <p class="date">${new Date(event.date).toLocaleDateString()} • ${event.time}</p>
+                                <div class="card-location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>${event.address}</span>
+                                </div>
+                                <a href="${event.googleFormLink}" target="_blank" class="register-btn">Register</a>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    noResults.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error loading events:', error);
+            }
+        });
+    </script> 
 </body>
 </html>
