@@ -508,7 +508,7 @@
             
             // Add dynamic events to existing static events
             const dynamicEventsHTML = events.map(event => `
-                <div class="event-card">
+                <div class="event-card" data-event-id="${event._id}">
                     <div class="card-image">
                         <img src="https://eventify-backend-tsng.onrender.com/${event.imagePath}" alt="${event.eventName}" onerror="this.src='https://via.placeholder.com/400x200?text=Event+Image'">
                         <span class="badge">${event.category}</span>
@@ -522,7 +522,7 @@
                             <i class="fas fa-map-marker-alt"></i>
                             <span>${event.address}</span>
                         </div>
-                        <a href="${event.googleFormLink}" target="_blank" class="register-btn">Register</a>
+                        <button class="register-btn" onclick="registerForDynamicEvent('${event._id}', '${event.googleFormLink}', this)">Register</button>
                     </div>
                 </div>
             `).join('');
@@ -530,10 +530,36 @@
             // Append dynamic events to the grid
             eventsGrid.innerHTML += dynamicEventsHTML;
             
+            // Check registration status for dynamic events
+            events.forEach(event => {
+                const isRegistered = localStorage.getItem(`registered_${event._id}`);
+                if (isRegistered) {
+                    const eventCard = document.querySelector(`[data-event-id="${event._id}"]`);
+                    const registerBtn = eventCard.querySelector('.register-btn');
+                    registerBtn.textContent = 'Registered';
+                    registerBtn.style.backgroundColor = '#28a745';
+                    registerBtn.disabled = true;
+                }
+            });
+            
         } catch (error) {
             console.error('Error loading dynamic events:', error);
         }
     });
+    
+    // Registration function for dynamic events
+    function registerForDynamicEvent(eventId, formLink, buttonElement) {
+        // Open Google Form in new tab
+        window.open(formLink, '_blank');
+        
+        // Mark as registered in localStorage
+        localStorage.setItem(`registered_${eventId}`, 'true');
+        
+        // Update button appearance
+        buttonElement.textContent = 'Registered';
+        buttonElement.style.backgroundColor = '#28a745';
+        buttonElement.disabled = true;
+    }
   </script>
  </body>
 </html>
